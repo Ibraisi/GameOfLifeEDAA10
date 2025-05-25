@@ -15,7 +15,7 @@ public class TestLifeBoard {
 		board.put(0, 0, true);
 		board.put(1, 1, false);
 		board.put(2, 2, true);
-		if (board.get(0, 0) && !board.get(1, 1) && !board.get(-1, -1) && !board.get(3, 3)) {
+		if (board.isAlive(0, 0) && !board.isAlive(1, 1) && !board.isAlive(-1, -1) && !board.isAlive(3, 3)) {
 			System.out.println("put och get ok");
 		} else {
 			System.out.println("Fel vid anrop av put eller get");

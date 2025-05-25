@@ -12,7 +12,6 @@ public class LifeView extends Frame {
 	private Square[][] squares;
 	private int rows,cols;
 
-	/** Skapar ett LifeView-fönster för spelplanen board */
 	public LifeView(LifeBoard board) {
 		super("Life");
 		this.board = board;
@@ -66,13 +65,10 @@ public class LifeView extends Frame {
 		setVisible(true);
 	}
 
-	/** Ritar upp de fixa delarna av spelplanen (rutnätet,
-      generationsräknaren och knapparna) */
 	public void drawBoard() {
 		repaint();
 	}
 
-	/** Ritar om de delar av ritfönstret som ändrats sedan föregående uppritning */
 	public void update() {
 		repaint();
 		for (int i = 0; i<rows; i++)
@@ -81,11 +77,6 @@ public class LifeView extends Frame {
 					squares[i][k].repaint();
 	}
 
-	/** Väntar tills användaren klickar med musen. Ger:
-      1: Klick i ruta pÂ spelplanen. Index för rutan kan hämtas med getRow
-			och getCol
-      2: Klick i Next-rutan
-      3: Klick i Quit-rutan */
 	public int getCommand() {
 		AWTEvent lastEvent = eventQueue.getNextEvent();
 		if (lastEvent.getSource() instanceof Square) {
@@ -100,17 +91,14 @@ public class LifeView extends Frame {
 		return lastCommand;
 	}
 
-	/** Tar reda pÂ radnummer för den klickade rutan efter kommando nr 1 */
 	public int getRow() {
 		return lastRow;
 	}
 
-	/** Tar reda pÂ kolonnummer för den klickade rutan efter kommando nr 1 */
 	public int getCol() {
 		return lastCol;
 	}
 
-	/*--------------------------------------------------*/
 
 	public void paint(Graphics g) {
 		generationLabel.setText("Generation: " + board.getGeneration() + "  ");
@@ -131,7 +119,7 @@ public class LifeView extends Frame {
 		}
 
 		public boolean isChanged() {
-			return filled != board.get(x,y);
+			return filled != board.isAlive(x,y);
 		}
 
 		public void paint(Graphics g) {
@@ -140,7 +128,7 @@ public class LifeView extends Frame {
 			g.drawLine(0,d.height-1,d.width-1,d.height-1);
 			g.drawLine(d.width-1,d.height-1,d.width-1,0);
 			g.drawLine(d.width-1,0,0,0);
-			filled = board.get(x,y);
+			filled = board.isAlive(x,y);
 			if (filled)
 				g.fillOval(2,2,d.width-4,d.height-4);
 		}
